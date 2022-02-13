@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Container, Row, Button } from "react-bootstrap";
+import foxy from "./foxy.jpg";
 import "./App.css";
 
 function App(): JSX.Element {
@@ -32,15 +33,37 @@ function App(): JSX.Element {
                                 <li>Have a 2-column layout on the page</li>
                                 <li>Put a red rectangle in each col</li>
                             </ol>
+                            <div
+                                style={{
+                                    backgroundColor: "red",
+                                    height: 75,
+                                    width: 50
+                                }}
+                            >
+                                <span style={{ color: "red" }}>1</span>
+                            </div>
                         </Col>
                         <Col>
                             <Button onClick={() => console.log("Hello World!")}>
                                 Log Hello World
                             </Button>
-                            <img
-                                src="../Pictures/fine.jpg"
-                                alt="This is fine."
-                            />
+                            <div
+                                style={{
+                                    backgroundColor: "red",
+                                    height: 100,
+                                    width: 200
+                                }}
+                            >
+                                <span style={{ color: "red" }}>2</span>
+                            </div>
+                            <div>
+                                <img
+                                    src={foxy}
+                                    alt="This is a picture of my cat."
+                                    height={400}
+                                    width={300}
+                                />
+                            </div>
                         </Col>
                     </Row>
                 </Container>
