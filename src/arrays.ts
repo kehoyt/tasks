@@ -5,7 +5,15 @@
  * the number twice.
  */
 export function bookEndList(numbers: number[]): number[] {
-    return numbers;
+    if (numbers.length !== 0) {
+        if (numbers.length === 1) {
+            return [...numbers, ...numbers];
+        }
+        const newNumbers = [numbers[0], numbers[numbers.length - 1]];
+        return newNumbers;
+    } else {
+        return [...numbers];
+    }
 }
 
 /**
