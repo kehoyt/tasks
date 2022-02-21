@@ -113,16 +113,11 @@ export function makeMath(addends: number[]): string {
     if (addends.length === 0) {
         return "0=0";
     }
-    let sumStr = "";
     let sum = 0;
     addends.map((num: number): void => {
-        sumStr =
-            sumStr === ""
-                ? sumStr + num.toString()
-                : sumStr + "+" + num.toString();
         sum = sum + num;
     });
-    return sum + "=" + sumStr;
+    return sum + "=" + addends.join("+"); //sumStr;
 }
 
 /**
