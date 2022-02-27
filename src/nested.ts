@@ -44,7 +44,7 @@ export function findQuestion(
     const found = questions.find((question: Question): boolean => {
         return question.id === id;
     });
-    return found === undefined ? null : found;
+    return found === undefined ? null : { ...found };
 }
 
 /**
@@ -179,7 +179,9 @@ export function addNewQuestion(
     name: string,
     type: QuestionType
 ): Question[] {
-    const added = [...questions];
+    const added = questions.map((question: Question): Question => {
+        return { ...question };
+    });
     added.push(makeBlankQuestion(id, name, type));
     return added;
 }
@@ -198,7 +200,7 @@ export function renameQuestionById(
         if (question.id === targetId) {
             return { ...question, name: newName };
         }
-        return question;
+        return { ...question };
     });
     return replacedName;
 }
@@ -223,7 +225,7 @@ export function changeQuestionTypeById(
             }
             return newQuestion;
         }
-        return question;
+        return { ...question };
     });
     return replacedType;
 }
@@ -254,7 +256,7 @@ export function editOption(
             }
             return { ...question, options: newOptions };
         }
-        return question;
+        return { ...question };
     });
     return editedOption;
 }
@@ -270,7 +272,9 @@ export function duplicateQuestionInArray(
     targetId: number,
     newId: number
 ): Question[] {
-    const newArray = [...questions];
+    const newArray = questions.map((question: Question): Question => {
+        return { ...question };
+    });
     const index = questions.findIndex(
         (question: Question) => question.id === targetId
     );
