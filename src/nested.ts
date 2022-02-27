@@ -215,7 +215,7 @@ export function changeQuestionTypeById(
     targetId: number,
     newQuestionType: QuestionType
 ): Question[] {
-    const replacedName = questions.map((question: Question): Question => {
+    const replacedType = questions.map((question: Question): Question => {
         if (question.id === targetId) {
             const newQuestion = { ...question, type: newQuestionType };
             if (newQuestionType !== "multiple_choice_question") {
@@ -225,7 +225,7 @@ export function changeQuestionTypeById(
         }
         return question;
     });
-    return replacedName;
+    return replacedType;
 }
 
 /**
@@ -244,7 +244,19 @@ export function editOption(
     targetOptionIndex: number,
     newOption: string
 ) {
-    return [];
+    const editedOption = questions.map((question: Question): Question => {
+        if (question.id === targetId) {
+            const newOptions = [...question.options];
+            if (targetOptionIndex === -1) {
+                newOptions.push(newOption);
+            } else {
+                newOptions.splice(targetOptionIndex, 1, newOption);
+            }
+            return { ...question, options: newOptions };
+        }
+        return question;
+    });
+    return editedOption;
 }
 
 /***
