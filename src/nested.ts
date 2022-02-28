@@ -7,10 +7,16 @@ import { duplicateQuestion, makeBlankQuestion } from "./objects";
  * that are `published`.
  */
 export function getPublishedQuestions(questions: Question[]): Question[] {
-    const publishedQuestions = questions.filter(
+    const shallowPublishedQuestions = questions.filter(
         (question: Question): boolean => {
             return question.published;
         }
+    );
+    const publishedQuestions = shallowPublishedQuestions.map(
+        (question: Question): Question => ({
+            ...question,
+            options: [...question.options]
+        })
     );
     return publishedQuestions;
 }
@@ -21,7 +27,7 @@ export function getPublishedQuestions(questions: Question[]): Question[] {
  * `expected`, and an empty array for its `options`.
  */
 export function getNonEmptyQuestions(questions: Question[]): Question[] {
-    const nonEmptyQuestions = questions.filter(
+    const shallowNonEmptyQuestions = questions.filter(
         (question: Question): boolean => {
             return !(
                 question.body === "" &&
@@ -29,6 +35,12 @@ export function getNonEmptyQuestions(questions: Question[]): Question[] {
                 question.options.length === 0
             );
         }
+    );
+    const nonEmptyQuestions = shallowNonEmptyQuestions.map(
+        (question: Question): Question => ({
+            ...question,
+            options: [...question.options]
+        })
     );
     return nonEmptyQuestions;
 }
@@ -44,7 +56,7 @@ export function findQuestion(
     const found = questions.find((question: Question): boolean => {
         return question.id === id;
     });
-    return found === undefined ? null : { ...found };
+    return found === undefined ? null : found;
 }
 
 /**
@@ -52,8 +64,12 @@ export function findQuestion(
  * with the given `id`.
  */
 export function removeQuestion(questions: Question[], id: number): Question[] {
-    const withoutId = questions.filter((question: Question): boolean => {
+    const shallowWithoutId = questions.filter((question: Question): boolean => {
         return question.id !== id;
+    });
+    // deep copying from filtered array
+    const withoutId = shallowWithoutId.map((question: Question): Question => {
+        return { ...question, options: [...question.options] };
     });
     return withoutId;
 }
@@ -149,7 +165,7 @@ export function makeAnswers(questions: Question[]): Answer[] {
  */
 export function publishAll(questions: Question[]): Question[] {
     const publishAll = questions.map((question: Question): Question => {
-        return { ...question, published: true };
+        return { ...question, published: true, options: [...question.options] };
     });
     return publishAll;
 }
@@ -180,7 +196,7 @@ export function addNewQuestion(
     type: QuestionType
 ): Question[] {
     const added = questions.map((question: Question): Question => {
-        return { ...question };
+        return { ...question, options: [...question.options] };
     });
     added.push(makeBlankQuestion(id, name, type));
     return added;
@@ -198,9 +214,13 @@ export function renameQuestionById(
 ): Question[] {
     const replacedName = questions.map((question: Question): Question => {
         if (question.id === targetId) {
-            return { ...question, name: newName };
+            return {
+                ...question,
+                options: [...question.options],
+                name: newName
+            };
         }
-        return { ...question };
+        return { ...question, options: [...question.options] };
     });
     return replacedName;
 }
@@ -219,13 +239,17 @@ export function changeQuestionTypeById(
 ): Question[] {
     const replacedType = questions.map((question: Question): Question => {
         if (question.id === targetId) {
-            const newQuestion = { ...question, type: newQuestionType };
+            const newQuestion = {
+                ...question,
+                options: [...question.options],
+                type: newQuestionType
+            };
             if (newQuestionType !== "multiple_choice_question") {
                 return { ...newQuestion, options: [] };
             }
             return newQuestion;
         }
-        return { ...question };
+        return { ...question, options: [...question.options] };
     });
     return replacedType;
 }
@@ -256,7 +280,7 @@ export function editOption(
             }
             return { ...question, options: newOptions };
         }
-        return { ...question };
+        return { ...question, options: [...question.options] };
     });
     return editedOption;
 }
@@ -273,7 +297,7 @@ export function duplicateQuestionInArray(
     newId: number
 ): Question[] {
     const newArray = questions.map((question: Question): Question => {
-        return { ...question };
+        return { ...question, options: [...question.options] };
     });
     const index = questions.findIndex(
         (question: Question) => question.id === targetId
