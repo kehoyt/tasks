@@ -269,7 +269,7 @@ export function editOption(
     targetId: number,
     targetOptionIndex: number,
     newOption: string
-) {
+): Question[] {
     const editedOption = questions.map((question: Question): Question => {
         if (question.id === targetId) {
             const newOptions = [...question.options];
