@@ -22,7 +22,7 @@ export function ChangeColor(): JSX.Element {
     function updateColor(event: ChangeEvent) {
         changeColor(event.target.value);
     }
-    // data-testid="colored-box"
+
     return (
         <div>
             <h3>Change Color</h3>
