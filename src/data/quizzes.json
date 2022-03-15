@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "title": "Quiz 1",
+        "questions": [
+            {
+                "id": 1,
+                "name": "Addition",
+                "body": "What is 2+2?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "4",
+                "points": 1,
+                "published": true
+            }
+        ],
+        "length": 1,
+        "description": "1"
+    },
+    {
+        "id": 2,
+        "title": "Which Animal Are You?",
+        "questions": [
+            {
+                "id": 2,
+                "name": "Letters",
+                "body": "What is the last letter of the English alphabet?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "Z",
+                "points": 1,
+                "published": false
+            }
+        ],
+        "length": 1,
+        "description": "I'm a koala bear"
+    },
+    {
+        "id": 3,
+        "title": "Are you smart?",
+        "questions": [
+            {
+                "id": 1,
+                "name": "Addition AGAIN",
+                "body": "What is 2+2?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "4",
+                "points": 1,
+                "published": true
+            },
+            {
+                "id": 1,
+                "name": "Addition AGAIN COPY",
+                "body": "What is 2+2?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "4",
+                "points": 1,
+                "published": true
+            }
+        ],
+        "length": 1,
+        "description": "Figure out if you're smart"
+    }
+]
