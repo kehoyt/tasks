@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 // import { Col, Container, Row, Button } from "react-bootstrap";
 // import foxy from "./foxy.jpg";
+import sketch from "./sketch.jpeg";
 import "./App.css";
 import { ChangeType } from "./components/ChangeType";
 import { RevealAnswer } from "./components/RevealAnswer";
@@ -18,8 +19,11 @@ import { EditMode } from "./form-components/EditMode";
 import { MultipleChoiceQuestion } from "./form-components/MultipleChoiceQuestion";
 import { ChangeColor } from "./form-components/ChangeColor";
 import { Quizzer } from "./quizzer/Quizzer";
+import { Button } from "react-bootstrap";
 
 function App(): JSX.Element {
+    const [visible, setVisibility] = useState<boolean>(true);
+
     return (
         <div className="App">
             <header className="App-header">
@@ -27,38 +31,48 @@ function App(): JSX.Element {
             </header>
             <Quizzer></Quizzer>
             <hr></hr>
-            <CheckAnswer expectedAnswer="42"></CheckAnswer>
+            <img src={sketch} width={500}></img>
             <hr></hr>
-            <GiveAttempts></GiveAttempts>
-            <hr></hr>
-            <EditMode></EditMode>
-            <hr></hr>
-            <ChangeColor></ChangeColor>
-            <hr></hr>
-            <MultipleChoiceQuestion
-                options={["a", "b", "c"]}
-                expectedAnswer="b"
-            ></MultipleChoiceQuestion>
-            <hr></hr>
-            <DoubleHalf></DoubleHalf>
-            <hr></hr>
-            <ChooseTeam></ChooseTeam>
-            <hr></hr>
-            <ColoredBox></ColoredBox>
-            <hr></hr>
-            <ShoveBox></ShoveBox>
-            <hr></hr>
-            <Counter></Counter>
-            <hr />
-            <RevealAnswer></RevealAnswer>
-            <hr />
-            <StartAttempt></StartAttempt>
-            <hr />
-            <TwoDice></TwoDice>
-            <hr />
-            <ChangeType></ChangeType>
-            <hr />
-            <CycleHoliday></CycleHoliday>
+            <Button onClick={() => setVisibility(!visible)}>
+                {visible ? "Hide" : "Show"}
+            </Button>
+            {/* <hr></hr> */}
+            {visible && (
+                <div>
+                    <CheckAnswer expectedAnswer="42"></CheckAnswer>
+                    <hr></hr>
+                    <GiveAttempts></GiveAttempts>
+                    <hr></hr>
+                    <EditMode></EditMode>
+                    <hr></hr>
+                    <ChangeColor></ChangeColor>
+                    <hr></hr>
+                    <MultipleChoiceQuestion
+                        options={["a", "b", "c"]}
+                        expectedAnswer="b"
+                    ></MultipleChoiceQuestion>
+                    <hr></hr>
+                    <DoubleHalf></DoubleHalf>
+                    <hr></hr>
+                    <ChooseTeam></ChooseTeam>
+                    <hr></hr>
+                    <ColoredBox></ColoredBox>
+                    <hr></hr>
+                    <ShoveBox></ShoveBox>
+                    <hr></hr>
+                    <Counter></Counter>
+                    <hr />
+                    <RevealAnswer></RevealAnswer>
+                    <hr />
+                    <StartAttempt></StartAttempt>
+                    <hr />
+                    <TwoDice></TwoDice>
+                    <hr />
+                    <ChangeType></ChangeType>
+                    <hr />
+                    <CycleHoliday></CycleHoliday>
+                </div>
+            )}
         </div>
     );
 }
