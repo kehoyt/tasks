@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Quiz } from "../interfaces/quiz";
 import quizData from "../data/quizzes.json";
-import { Question } from "../interfaces/question";
+// import { Question } from "../interfaces/question";
 import { Col } from "react-bootstrap";
+import { QuizComponent } from "./QuizComponent";
 
 // typecasted the test data:
 const QUIZDATA: Quiz[] = quizData as Quiz[];
@@ -21,12 +22,9 @@ export function Quizzer(): JSX.Element {
         <div>
             <h3>Quizzer</h3>
             <Col>
-                {quizzes.map((quiz: Quiz) => (
-                    <div key={quiz.id}>
-                        {quiz.title}
-                        {quiz.questions.map((question: Question) => (
-                            <div key={question.id}>{question.name}</div>
-                        ))}
+                {quizzes.map((quizElt: Quiz) => (
+                    <div key={quizElt.id}>
+                        <QuizComponent quiz={quizElt}></QuizComponent>
                     </div>
                 ))}
             </Col>

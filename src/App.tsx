@@ -33,6 +33,17 @@ function App(): JSX.Element {
             <hr></hr>
             <img src={sketch} width={500}></img>
             <hr></hr>
+            Completed tasks:
+            <ul>
+                <li>
+                    can see a list of quizzes (title, description, and number of
+                    questions)
+                </li>
+                <li>
+                    Quiz questions can be of AT LEAST two types: a short answer
+                    question or multiple choice question
+                </li>
+            </ul>
             <Button onClick={() => setVisibility(!visible)}>
                 {visible ? "Hide" : "Show"}
             </Button>

@@ -10,4 +10,7 @@ describe("Quizzer Tests", () => {
         // Up to you to decide what your tests are!
         // Add more tests, more components, more test files!
     });
+    test("Quizzer has a list of quizzes from test data", () => {
+        expect(screen.getAllByTestId("quiz-component")).toHaveLength(3); //.toBeInTheDocument();
+    });
 });
