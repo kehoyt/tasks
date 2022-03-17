@@ -43,6 +43,7 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                             {question.type === "short_answer_question" && (
                                 <ShortAnswerResponse
                                     expectedAnswer={question.expected}
+                                    questionId={question.id}
                                 ></ShortAnswerResponse>
                             )}
                             {question.type === "multiple_choice_question" && (

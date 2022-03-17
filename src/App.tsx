@@ -41,7 +41,8 @@ function App(): JSX.Element {
                 </li>
                 <li>
                     Users can select a specific quiz to see the questions,
-                    including the question’s name, body, and points
+                    including the question’s name, body, and points (click on
+                    quiz title to view)
                 </li>
                 <li>
                     Quiz questions can be of AT LEAST two types: a short answer

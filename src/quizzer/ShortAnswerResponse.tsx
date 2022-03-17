@@ -1,32 +1,54 @@
 import React, { useState } from "react";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+import { Answer } from "../interfaces/answer";
 
 type ChangeEvent = React.ChangeEvent<
     HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
 >;
 
 export function ShortAnswerResponse({
-    expectedAnswer
+    expectedAnswer,
+    questionId
 }: {
     expectedAnswer: string;
+    questionId: number;
 }): JSX.Element {
-    const [userAnswer, changeUserAnswer] = useState<string>("");
+    const [answer, changeAnswer] = useState<Answer>({
+        questionId: questionId,
+        text: "",
+        correct: false,
+        submitted: false
+    });
 
     function updateAnswer(event: ChangeEvent) {
-        changeUserAnswer(event.target.value);
+        changeAnswer({
+            ...answer,
+            text: event.target.value,
+            correct: event.target.value === expectedAnswer
+        });
+    }
+
+    function submissionControl() {
+        changeAnswer({
+            ...answer,
+            submitted: !answer.submitted
+        });
     }
 
     return (
         <div>
             <Form.Group data-testid="shortanswerinput">
-                <Form.Control value={userAnswer} onChange={updateAnswer} />
+                <Form.Control value={answer.text} onChange={updateAnswer} />
             </Form.Group>
-            {expectedAnswer === userAnswer && (
+            {answer.submitted && answer.correct && (
                 <div data-testid="correct">✔️</div>
             )}
-            {expectedAnswer !== userAnswer && (
+            {answer.submitted && !answer.correct && (
                 <div data-testid="incorrect">❌</div>
             )}
+            <Button onClick={submissionControl} disabled={answer.submitted}>
+                Submit
+            </Button>
         </div>
     );
 }
