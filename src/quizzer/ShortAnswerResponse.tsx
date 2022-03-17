@@ -16,7 +16,7 @@ export function ShortAnswerResponse({
     const [answer, changeAnswer] = useState<Answer>({
         questionId: questionId,
         text: "",
-        correct: false,
+        correct: "" === expectedAnswer,
         submitted: false
     });
 
@@ -38,7 +38,11 @@ export function ShortAnswerResponse({
     return (
         <div>
             <Form.Group data-testid="shortanswerinput">
-                <Form.Control value={answer.text} onChange={updateAnswer} />
+                <Form.Control
+                    value={answer.text}
+                    onChange={updateAnswer}
+                    disabled={answer.submitted}
+                />
             </Form.Group>
             {answer.submitted && answer.correct && (
                 <div data-testid="correct">✔️</div>
@@ -46,7 +50,11 @@ export function ShortAnswerResponse({
             {answer.submitted && !answer.correct && (
                 <div data-testid="incorrect">❌</div>
             )}
-            <Button onClick={submissionControl} disabled={answer.submitted}>
+            <Button
+                onClick={submissionControl}
+                disabled={answer.submitted}
+                data-testid="submit-answer"
+            >
                 Submit
             </Button>
         </div>

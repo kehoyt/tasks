@@ -39,8 +39,9 @@ describe("Quizzer Tests", () => {
         comp1.click();
         const inputBox = screen.getByRole("textbox");
         expect(inputBox).toBeInTheDocument();
-        expect(screen.getByTestId("incorrect")).toBeInTheDocument();
         userEvent.type(inputBox, "4");
+        const submit = screen.getByRole("button", { name: "Submit" });
+        submit.click();
         expect(screen.getByTestId("correct")).toBeInTheDocument();
     });
     test("Can check multiple choice answers", () => {
@@ -48,17 +49,13 @@ describe("Quizzer Tests", () => {
         const comp2 = comps[1];
         comp2.click();
         const mcBox = screen.queryAllByRole("combobox");
-        // one correct, one incorrect
-        expect(screen.getByTestId("correct")).toBeInTheDocument();
-        expect(screen.getByTestId("incorrect")).toBeInTheDocument();
-        // both incorrect
         userEvent.selectOptions(mcBox[1], "Kanye");
+        const submit = screen.getAllByRole("button", { name: "Submit" });
+        submit[1].click();
         expect(screen.queryByTestId("correct")).not.toBeInTheDocument();
-        expect(screen.getAllByTestId("incorrect")).toHaveLength(2); //toBeInTheDocument();
-        //both correct
-        userEvent.selectOptions(mcBox[0], "Spongebob Squarepants");
-        userEvent.selectOptions(mcBox[1], "Taylor");
-        expect(screen.queryAllByTestId("correct")).toHaveLength(2); //toBeInTheDocument();
-        expect(screen.queryByTestId("incorrect")).not.toBeInTheDocument();
+        expect(screen.getByTestId("incorrect")).toBeInTheDocument();
+        //gives correct response even if not changed
+        submit[0].click();
+        expect(screen.queryByTestId("correct")).not.toBeInTheDocument();
     });
 });

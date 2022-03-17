@@ -50,6 +50,7 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                                 <MCResponse
                                     expectedAnswer={question.expected}
                                     options={question.options}
+                                    questionId={question.id}
                                 ></MCResponse>
                             )}
                         </Col>
