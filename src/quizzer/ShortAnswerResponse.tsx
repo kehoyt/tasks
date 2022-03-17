@@ -21,12 +21,12 @@ export function ShortAnswerResponse({
             <Form.Group data-testid="shortanswerinput">
                 <Form.Control value={userAnswer} onChange={updateAnswer} />
             </Form.Group>
-            <div data-testid="correct">
-                {expectedAnswer === userAnswer && "✔️"}
-            </div>
-            <div data-testid="incorrect">
-                {expectedAnswer !== userAnswer && "❌"}
-            </div>
+            {expectedAnswer === userAnswer && (
+                <div data-testid="correct">✔️</div>
+            )}
+            {expectedAnswer !== userAnswer && (
+                <div data-testid="incorrect">❌</div>
+            )}
         </div>
     );
 }

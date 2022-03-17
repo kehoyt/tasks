@@ -29,10 +29,8 @@ export function MCResponse({
                     </option>
                 ))}
             </Form.Select>
-            <div data-testid="correct">{expectedAnswer === answer && "✔️"}</div>
-            <div data-testid="incorrect">
-                {expectedAnswer !== answer && "❌"}
-            </div>
+            {expectedAnswer === answer && <div data-testid="correct">✔️</div>}
+            {expectedAnswer !== answer && <div data-testid="incorrect">❌</div>}
         </div>
     );
 }
