@@ -27,9 +27,9 @@
                 "body": "Who lives in a pineapple under the sea?",
                 "type": "multiple_choice_question",
                 "options": [
-                    "Spongebob Squarepants",
                     "Patrick Star",
                     "Squidward",
+                    "Spongebob Squarepants",
                     "Mr. Krabs",
                     "Plantkon"
                 ],

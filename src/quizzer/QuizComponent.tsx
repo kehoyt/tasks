@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import { Button, Col } from "react-bootstrap";
 import { Question } from "../interfaces/question";
 import { Quiz } from "../interfaces/quiz";
+import { MCResponse } from "./MCResponse";
+import { ShortAnswerResponse } from "./ShortAnswerResponse";
+
+// type ChangeEvent = React.ChangeEvent<
+//     HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
+// >;
 
 export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
     const [showMore, toggleShowMore] = useState<boolean>(false);
@@ -33,6 +39,18 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                             {question.body}
 
                             {"points: " + question.points}
+
+                            {question.type === "short_answer_question" && (
+                                <ShortAnswerResponse
+                                    expectedAnswer={question.expected}
+                                ></ShortAnswerResponse>
+                            )}
+                            {question.type === "multiple_choice_question" && (
+                                <MCResponse
+                                    expectedAnswer={question.expected}
+                                    options={question.options}
+                                ></MCResponse>
+                            )}
                         </Col>
                     ))}
                     <Button

@@ -36,8 +36,8 @@ function App(): JSX.Element {
             Completed tasks:
             <ul>
                 <li>
-                    can see a list of quizzes (title, description, and number of
-                    questions)
+                    Users can see a list of quizzes, including the quizzes
+                    title, description, and how many questions it has
                 </li>
                 <li>
                     Users can select a specific quiz to see the questions,
@@ -46,6 +46,10 @@ function App(): JSX.Element {
                 <li>
                     Quiz questions can be of AT LEAST two types: a short answer
                     question or multiple choice question
+                </li>
+                <li>
+                    Users can enter or choose an answer for a quiz question, and
+                    be told if they are correct
                 </li>
             </ul>
             <Button onClick={() => setVisibility(!visible)}>
