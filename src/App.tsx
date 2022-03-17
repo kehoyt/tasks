@@ -22,7 +22,7 @@ import { Quizzer } from "./quizzer/Quizzer";
 import { Button } from "react-bootstrap";
 
 function App(): JSX.Element {
-    const [visible, setVisibility] = useState<boolean>(true);
+    const [visible, setVisibility] = useState<boolean>(false);
 
     return (
         <div className="App">
@@ -38,6 +38,10 @@ function App(): JSX.Element {
                 <li>
                     can see a list of quizzes (title, description, and number of
                     questions)
+                </li>
+                <li>
+                    Users can select a specific quiz to see the questions,
+                    including the question’s name, body, and points
                 </li>
                 <li>
                     Quiz questions can be of AT LEAST two types: a short answer

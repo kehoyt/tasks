@@ -1,8 +1,11 @@
-import React from "react";
-import { Button } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Col } from "react-bootstrap";
+import { Question } from "../interfaces/question";
 import { Quiz } from "../interfaces/quiz";
 
 export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
+    const [showMore, toggleShowMore] = useState<boolean>(false);
+
     return (
         <div
             data-testid="quiz-component"
@@ -10,8 +13,9 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
         >
             <h2>
                 <span
+                    data-testid="quiz-title"
                     onClick={() => {
-                        console.log("Try to view");
+                        toggleShowMore(true);
                     }}
                     style={{ color: "blue" }}
                 >
@@ -19,6 +23,27 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                 </span>
             </h2>
             {quiz.description + ", number of questions: " + quiz.length}
+            {showMore && (
+                <div>
+                    Questions:
+                    {quiz.questions.map((question: Question) => (
+                        <Col key={question.id}>
+                            {question.name}
+
+                            {question.body}
+
+                            {"points: " + question.points}
+                        </Col>
+                    ))}
+                    <Button
+                        onClick={() => {
+                            toggleShowMore(false);
+                        }}
+                    >
+                        Hide Questions
+                    </Button>
+                </div>
+            )}
             {/* <Button
                 onClick={() => {
                     console.log("clicked");

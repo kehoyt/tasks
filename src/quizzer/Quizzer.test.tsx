@@ -11,6 +11,25 @@ describe("Quizzer Tests", () => {
         // Add more tests, more components, more test files!
     });
     test("Quizzer has a list of quizzes from test data", () => {
-        expect(screen.getAllByTestId("quiz-component")).toHaveLength(3); //.toBeInTheDocument();
+        expect(screen.getAllByTestId("quiz-component")).toHaveLength(3);
+    });
+    test("Can show quiz questions", () => {
+        const comps = screen.getAllByTestId("quiz-title");
+        const comp1 = comps[0];
+        comp1.click();
+        expect(screen.getByText("Questions:")).toBeInTheDocument();
+        const showhide = screen.getByRole("button", { name: "Hide Questions" });
+        expect(showhide).toBeInTheDocument();
+    });
+    test("Can hide quiz questions", () => {
+        const comps = screen.getAllByTestId("quiz-title");
+        const comp1 = comps[0];
+        comp1.click();
+        const showhide = screen.getByRole("button", {
+            name: "Hide Questions"
+        });
+        showhide.click();
+        expect(showhide).not.toBeInTheDocument();
+        expect(screen.queryByText("Questions:")).not.toBeInTheDocument();
     });
 });
