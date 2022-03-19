@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { QuizAnswer } from "../interfaces/quizanswer";
 import { Question } from "../interfaces/question";
 import { Quiz } from "../interfaces/quiz";
@@ -31,9 +31,9 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
     }
 
     return (
-        <div
+        <Container
             data-testid="quiz-component"
-            style={{ border: "1px solid black", padding: "4px" }}
+            style={{ border: "1px solid black", padding: "8px" }}
         >
             <h2>
                 <span
@@ -41,23 +41,26 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                     onClick={() => {
                         toggleShowMore(true);
                     }}
-                    style={{ color: "blue" }}
+                    style={{ color: "blue", textDecoration: "underline" }}
                 >
                     {quiz.title}:
                 </span>
             </h2>
-            {quiz.description + ", number of questions: " + quiz.length}
+            <Container style={{ padding: "8px" }}>{quiz.description}</Container>
             {showMore && (
                 <div data-testid="questionsView">
-                    Questions:
-                    {quiz.questions.map((question: Question) => (
-                        <Col key={question.id}>
-                            {question.name}
-
-                            {question.body}
-
-                            {"points: " + question.points}
-
+                    {quiz.questions.map((question: Question, index: number) => (
+                        <div key={question.id}>
+                            <div>
+                                Question {index + 1}: {question.name}
+                            </div>
+                            <p>
+                                {" "}
+                                {question.body} ({question.points} points)
+                            </p>
+                            {/* <p style={{ textAlign: "right" }}>
+                                {"points: " + question.points}
+                            </p> */}
                             {question.type === "short_answer_question" && (
                                 <ShortAnswerResponse
                                     expectedAnswer={question.expected}
@@ -75,16 +78,14 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                                     points={question.points}
                                 ></MCResponse>
                             )}
-                        </Col>
+                        </div>
                     ))}
-                    <Row data-testid="points-earned">
-                        points earned: {totalPoints}
-                    </Row>
-                    {/* {quizAnswers.map((answer: QuizAnswer) => (
-                        <Row key={answer.text}>
-                            {answer.correct && <div>{answer.points}</div>}
-                        </Row>
-                    ))} */}
+                    <div
+                        data-testid="points-earned"
+                        style={{ textAlign: "left", padding: "4px" }}
+                    >
+                        <p>points earned: {totalPoints}</p>
+                    </div>
                     <Button
                         onClick={() => {
                             toggleShowMore(false);
@@ -94,6 +95,9 @@ export function QuizComponent({ quiz }: { quiz: Quiz }): JSX.Element {
                     </Button>
                 </div>
             )}
-        </div>
+            <Container style={{ textAlign: "right" }}>
+                number of questions: {quiz.length}
+            </Container>
+        </Container>
     );
 }

@@ -35,11 +35,12 @@ export function ShortAnswerResponse({
     }
 
     function submissionControl() {
-        changeAnswer({
+        const newAns = {
             ...answer,
             submitted: !answer.submitted
-        });
-        updateQuizAnswers(answer);
+        };
+        changeAnswer(newAns);
+        updateQuizAnswers(newAns);
     }
 
     return (
@@ -57,13 +58,15 @@ export function ShortAnswerResponse({
             {answer.submitted && !answer.correct && (
                 <div data-testid="incorrect">❌</div>
             )}
-            <Button
-                onClick={submissionControl}
-                disabled={answer.submitted}
-                data-testid="submit-answer"
-            >
-                Submit
-            </Button>
+            <div style={{ textAlign: "right" }}>
+                <Button
+                    onClick={submissionControl}
+                    disabled={answer.submitted}
+                    data-testid="submit-answer"
+                >
+                    Submit
+                </Button>{" "}
+            </div>
         </div>
     );
 }

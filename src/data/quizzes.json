@@ -23,7 +23,7 @@
         "questions": [
             {
                 "id": 3,
-                "name": "Spongebob",
+                "name": "Cartoons",
                 "body": "Who lives in a pineapple under the sea?",
                 "type": "multiple_choice_question",
                 "options": [

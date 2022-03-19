@@ -21,13 +21,13 @@ export function Quizzer(): JSX.Element {
     return (
         <div>
             <h3>Quizzer</h3>
-            <Col>
+            <div>
                 {quizzes.map((quizElt: Quiz) => (
-                    <div key={quizElt.id}>
+                    <div key={quizElt.id} style={{ padding: "8px" }}>
                         <QuizComponent quiz={quizElt}></QuizComponent>
                     </div>
                 ))}
-            </Col>
+            </div>
         </div>
     );
 }
