@@ -18,7 +18,7 @@ describe("Quizzer Tests", () => {
         const comps = screen.getAllByTestId("quiz-title");
         const comp1 = comps[0];
         comp1.click();
-        expect(screen.getByText("Questions:")).toBeInTheDocument();
+        expect(screen.getByTestId("questionsView")).toBeInTheDocument();
         const showhide = screen.getByRole("button", { name: "Hide Questions" });
         expect(showhide).toBeInTheDocument();
     });
@@ -57,5 +57,28 @@ describe("Quizzer Tests", () => {
         //gives correct response even if not changed
         submit[0].click();
         expect(screen.queryByTestId("correct")).not.toBeInTheDocument();
+    });
+    test("Can see total points earned", () => {
+        const comps = screen.getAllByTestId("quiz-title");
+        const comp3 = comps[2];
+        comp3.click();
+        const points = screen.getByTestId("points-earned");
+        const shortAnswers = screen.getAllByRole("textbox");
+        const multipleChoice = screen.getAllByRole("combobox");
+        const submit = screen.getAllByRole("button", { name: "Submit" });
+
+        expect(points.textContent?.includes("0"));
+        userEvent.type(shortAnswers[0], "4");
+        submit[0].click();
+        expect(points.textContent?.includes("5"));
+        userEvent.type(shortAnswers[1], "black");
+        submit[1].click();
+        expect(points.textContent?.includes("5"));
+        userEvent.selectOptions(multipleChoice[0], "apple");
+        submit[2].click();
+        expect(points.textContent?.includes("5"));
+        userEvent.selectOptions(multipleChoice[1], "circle");
+        submit[3].click();
+        expect(points.textContent?.includes("7"));
     });
 });

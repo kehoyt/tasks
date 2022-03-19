@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { Answer } from "../interfaces/answer";
+import { QuizAnswer } from "../interfaces/quizanswer";
 
 type ChangeEvent = React.ChangeEvent<
     HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement
@@ -9,17 +9,22 @@ type ChangeEvent = React.ChangeEvent<
 export function MCResponse({
     options,
     expectedAnswer,
-    questionId
+    questionId,
+    updateQuizAnswers,
+    points
 }: {
     options: string[];
     expectedAnswer: string;
     questionId: number;
+    updateQuizAnswers: (answer: QuizAnswer) => void;
+    points: number;
 }): JSX.Element {
-    const [answer, changeAnswer] = useState<Answer>({
+    const [answer, changeAnswer] = useState<QuizAnswer>({
         questionId: questionId,
         text: options[0],
         correct: options[0] === expectedAnswer,
-        submitted: false
+        submitted: false,
+        points: points
     });
 
     function updateAnswer(event: ChangeEvent) {
@@ -31,10 +36,12 @@ export function MCResponse({
     }
 
     function submissionControl() {
-        changeAnswer({
+        const newAns = {
             ...answer,
             submitted: !answer.submitted
-        });
+        };
+        changeAnswer(newAns);
+        updateQuizAnswers(newAns);
     }
 
     return (
