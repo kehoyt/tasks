@@ -53,6 +53,7 @@ function App(): JSX.Element {
                     be told if they are correct
                 </li>
                 <li>Users can see how many total points they have earned</li>
+                <li>Users can add a new quiz</li>
             </ul>
             <Button onClick={() => setVisibility(!visible)}>
                 {visible ? "Hide" : "Show"}

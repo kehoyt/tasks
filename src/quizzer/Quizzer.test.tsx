@@ -81,4 +81,12 @@ describe("Quizzer Tests", () => {
         submit[3].click();
         expect(points.textContent?.includes("7"));
     });
+    test("Can add quizzes", () => {
+        expect(screen.getAllByTestId("quiz-component")).toHaveLength(3);
+        const add = screen.getByTestId("add-quiz");
+        add.click();
+        expect(screen.getAllByTestId("quiz-component")).toHaveLength(4);
+        add.click();
+        expect(screen.getAllByTestId("quiz-component")).toHaveLength(5);
+    });
 });

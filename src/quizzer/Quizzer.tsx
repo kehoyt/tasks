@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Quiz } from "../interfaces/quiz";
 import quizData from "../data/quizzes.json";
 // import { Question } from "../interfaces/question";
-import { Col } from "react-bootstrap";
+import { Button, Col } from "react-bootstrap";
 import { QuizComponent } from "./QuizComponent";
 
 // typecasted the test data:
@@ -18,6 +18,18 @@ export function Quizzer(): JSX.Element {
 
     const [quizzes, setQuizzes] = useState<Quiz[]>(QUIZZES);
 
+    function addNewQuiz(): void {
+        const newQuiz = {
+            id: quizzes.length + 1,
+            title: "",
+            questions: [],
+            length: 0,
+            description: ""
+        };
+        const newQuizzes = [...quizzes, newQuiz];
+        setQuizzes(newQuizzes);
+    }
+
     return (
         <div>
             <h3>Quizzer</h3>
@@ -27,6 +39,14 @@ export function Quizzer(): JSX.Element {
                         <QuizComponent quiz={quizElt}></QuizComponent>
                     </div>
                 ))}
+                <Button
+                    data-testid="add-quiz"
+                    onClick={() => {
+                        addNewQuiz();
+                    }}
+                >
+                    Add Quiz
+                </Button>
             </div>
         </div>
     );
