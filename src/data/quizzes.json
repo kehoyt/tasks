@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "title": "Quiz 1",
+        "questions": [
+            {
+                "id": 4,
+                "name": "Addition",
+                "body": "What is 2+2?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "4",
+                "points": 1,
+                "published": true
+            }
+        ],
+        "length": 1,
+        "description": "basic boring quiz"
+    },
+    {
+        "id": 2,
+        "title": "Pop Culture References",
+        "questions": [
+            {
+                "id": 3,
+                "name": "Cartoons",
+                "body": "Who lives in a pineapple under the sea?",
+                "type": "multiple_choice_question",
+                "options": [
+                    "Patrick Star",
+                    "Squidward",
+                    "Spongebob Squarepants",
+                    "Mr. Krabs",
+                    "Plantkon"
+                ],
+                "expected": "Spongebob Squarepants",
+                "points": 1,
+                "published": false
+            },
+            {
+                "id": 7,
+                "name": "Bad Blood",
+                "body": "Team Kanye or Team Taylor?",
+                "type": "multiple_choice_question",
+                "options": ["Taylor", "Kanye"],
+                "expected": "Taylor",
+                "points": 1,
+                "published": false
+            }
+        ],
+        "length": 2,
+        "description": "Do you know pop culture?"
+    },
+    {
+        "id": 3,
+        "title": "Are you smart?",
+        "questions": [
+            {
+                "id": 1,
+                "name": "Basic Math",
+                "body": "What is 2+2?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "4",
+                "points": 5,
+                "published": true
+            },
+            {
+                "id": 2,
+                "name": "Sky",
+                "body": "What color is the sky?",
+                "type": "short_answer_question",
+                "options": [],
+                "expected": "blue",
+                "points": 5,
+                "published": true
+            },
+            {
+                "id": 5,
+                "name": "Colors",
+                "body": "Which of these is a color?",
+                "type": "multiple_choice_question",
+                "options": ["red", "apple", "firetruck"],
+                "expected": "red",
+                "points": 1,
+                "published": true
+            },
+            {
+                "id": 9,
+                "name": "Shapes",
+                "body": "What shape can you make with one line?",
+                "type": "multiple_choice_question",
+                "options": ["square", "triangle", "circle"],
+                "expected": "circle",
+                "points": 2,
+                "published": false
+            }
+        ],
+        "length": 4,
+        "description": "Figure out if you're smart by answering basic questions"
+    }
+]
